@@ -1,0 +1,21 @@
+# Aidan has verified that this dockerfile works just fine. 
+# Use the official Gradle 7.6.1 with JDK 11 as base image
+FROM gradle:7.6.1-jdk11
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the project files to the container
+COPY --chown=gradle:gradle . .
+
+# Grant execution permission to the Gradle wrapper
+RUN chmod +x gradlew
+
+# Build the application using Gradle
+RUN ./gradlew build --no-daemon
+
+# Expose the necessary port
+EXPOSE 8080
+
+# Run the application using the Gradle wrapper
+CMD ["./gradlew", "appRun", "--no-daemon"]
