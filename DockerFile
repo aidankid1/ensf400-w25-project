@@ -1,6 +1,6 @@
 # Aidan has verified that this dockerfile works just fine. 
 # Use the official Gradle 7.6.1 with JDK 11 as base image
-FROM gradle:7.6.1-jdk17
+FROM gradle:7.6.1-jdk11
 
 # Set the working directory inside the container
 WORKDIR /app
