@@ -7,7 +7,7 @@ RUN apk add --update docker openrc
 
 # Install Gradle dependencies
 RUN apk add --no-cache \
-    openjdk11 \
+    openjdk17 \
     bash \
     docker \
     curl \
