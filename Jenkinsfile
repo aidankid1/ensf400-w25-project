@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3.9.0' // or 'Default' if that's how it's configured
+        maven 'Default'
     }
 
     stages {
