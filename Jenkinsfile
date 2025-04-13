@@ -7,6 +7,15 @@ pipeline {
     }
 
     stages {
+        stage('Install Maven') {
+            steps {
+                sh '''
+                    apk add --no-cache maven
+                    mvn -v
+                '''
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
