@@ -6,10 +6,6 @@ pipeline {
         TAG = "${GIT_COMMIT}"
     }
 
-    tools {
-        maven 'Default'
-    }
-
     stages {
         stage('Checkout') {
             steps {
