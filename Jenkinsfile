@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3.9.0' // Make sure you have this version installed in Jenkins under "Global Tool Configuration"
+        maven 'Maven 3.9.0' // or 'Default' if that's how it's configured
     }
 
     stages {
@@ -49,3 +49,7 @@ pipeline {
 
     post {
         always {
+            cleanWs()
+        }
+    }
+}
