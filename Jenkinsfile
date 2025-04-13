@@ -7,15 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Install Maven') {
-            steps {
-                sh '''
-                    apk add --no-cache maven
-                    mvn -v
-                '''
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -24,13 +15,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh './gradlew build'
             }
         }
 
         stage('Unit Tests') {
             steps {
-                sh 'mvn test'
+                sh './gradlew test'
             }
         }
 
