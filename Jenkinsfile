@@ -1,4 +1,5 @@
 // This jenkinsfile is used to run CI/CD on my local (Windows) box, no VM's needed.
+// Demo
 
 pipeline {
 
