@@ -1,21 +1,29 @@
-# Aidan has verified that this dockerfile works just fine. 
-# Use the official Gradle 7.6.1 with JDK 11 as base image
-FROM gradle:7.6.1-jdk11
+FROM jenkins/jenkins:alpine
+# switch to root user
+USER root
 
-# Set the working directory inside the container
-WORKDIR /app
+# install docker on top of the base image
+RUN apk add --update docker openrc
 
-# Copy the project files to the container
-COPY --chown=gradle:gradle . .
+# Install Gradle dependencies
+RUN apk add --no-cache \
+    openjdk11 \
+    bash \
+    docker \
+    curl \
+    unzip
 
-# Grant execution permission to the Gradle wrapper
-RUN chmod +x gradlew
+# Set Gradle version
+ENV GRADLE_VERSION=7.6
+ENV GRADLE_HOME=/opt/gradle
+# Download and install Gradle
+RUN mkdir -p ${GRADLE_HOME} && \
+    curl -fsSL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /tmp/gradle.zip && \
+    unzip /tmp/gradle.zip -d /opt/gradle && \
+    rm /tmp/gradle.zip
 
-# Build the application using Gradle
-RUN ./gradlew build --no-daemon
+# Add Gradle to PATH
+ENV PATH="${GRADLE_HOME}/gradle-${GRADLE_VERSION}/bin:${PATH}"
 
-# Expose the necessary port
-EXPOSE 8080
-
-# Run the application using the Gradle wrapper
-CMD ["./gradlew", "appRun", "--no-daemon"]
+# Verify installation
+RUN gradle -v
