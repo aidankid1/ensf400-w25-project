@@ -1,6 +1,6 @@
 // This jenkinsfile is used to run CI/CD on my local (Windows) box, no VM's needed.
 // Demo
-
+// Ensured the Jenkins file matches the one of the most recent PR!!!! Using Xavier as a Image name
 pipeline {
 
   agent any
